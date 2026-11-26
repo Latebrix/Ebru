@@ -1,0 +1,18 @@
+.comb-edge {
+  display: block;
+  width: 100%;
+  height: clamp(130px, 25vh, 280px);
+  pointer-events: none;
+}
+
+.comb-edge.is-flow {
+  position: relative;
+  margin-top: -1px;
+}
+
+.comb-edge.is-over {
+  position: absolute;
+  z-index: 4;
+  left: 0;
+  bottom: calc(100% - 1px);
+}

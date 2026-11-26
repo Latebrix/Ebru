@@ -1,0 +1,205 @@
+.kalem {
+  position: relative;
+  z-index: 9;
+  background: var(--ink);
+  color: var(--bone);
+}
+
+.kalem-stage {
+  position: relative;
+  min-height: 126vh;
+  min-height: 126svh;
+  overflow-x: clip;
+}
+
+.kalem-water {
+  position: absolute;
+  z-index: 1;
+  left: 16%;
+  top: 0;
+  width: 84%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* In front of Mizan: it comes up from behind the ink. */
+.kalem-bath {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: clamp(240px, 38vh, 420px);
+  pointer-events: none;
+}
+
+.kalem-in {
+  position: relative;
+  z-index: 3;
+  padding: clamp(80px, 12svh, 150px) var(--gutter) 0;
+  pointer-events: none;
+}
+
+.kalem-copy {
+  max-width: min(47vw, 900px);
+}
+
+.kalem-copy > * {
+  pointer-events: auto;
+}
+
+.kalem-copy > .lead {
+  margin-top: clamp(18px, 3svh, 36px);
+  max-width: 25em;
+  color: var(--bone-2);
+}
+
+.asks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: clamp(22px, 3.6svh, 42px);
+}
+
+.ask {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  height: 52px;
+  padding: 0 22px 0 8px;
+  border-radius: 18px;
+  background: rgb(8 8 13 / 70%);
+  box-shadow: inset 0 0 0 1.5px rgb(244 236 224 / 26%);
+  font-size: 16.5px;
+  font-weight: 500;
+  transition:
+    box-shadow 0.25s,
+    background 0.25s;
+}
+
+.ask:hover,
+.ask[aria-pressed='true'] {
+  box-shadow: inset 0 0 0 1.5px var(--bone);
+}
+
+.ask-icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: var(--bone);
+  color: var(--ink);
+  transition: background 0.3s;
+}
+
+.asks li:nth-child(1) .ask:hover .ask-icon,
+.asks li:nth-child(1) .ask[aria-pressed='true'] .ask-icon {
+  background: var(--pink);
+}
+
+.asks li:nth-child(2) .ask:hover .ask-icon,
+.asks li:nth-child(2) .ask[aria-pressed='true'] .ask-icon {
+  background: var(--saff);
+}
+
+.asks li:nth-child(3) .ask:hover .ask-icon,
+.asks li:nth-child(3) .ask[aria-pressed='true'] .ask-icon {
+  background: var(--verm);
+}
+
+.kalem-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 22px;
+  margin-top: 22px;
+}
+
+.kalem-caption {
+  position: absolute;
+  z-index: 5;
+  left: var(--gutter);
+  right: var(--gutter);
+  bottom: clamp(200px, 33vh, 360px);
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.35s,
+    transform 0.6s var(--ease-out);
+}
+
+.kalem-caption[data-on='true'] {
+  opacity: 1;
+  transform: none;
+}
+
+.kalem-caption p {
+  max-width: 26em;
+  padding: 18px 28px 20px;
+  border-radius: 24px;
+  background: var(--bone);
+  color: var(--ink);
+  text-align: center;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(21px, 2.3vw, 42px);
+  letter-spacing: -0.032em;
+  line-height: 1.16;
+  text-wrap: balance;
+  animation: swap 0.5s var(--ease-out);
+}
+
+.kalem-caption span {
+  opacity: 0.22;
+  transition: opacity 0.18s;
+}
+
+.kalem-caption span[data-on='true'] {
+  opacity: 1;
+}
+
+
+.kalem-error {
+  position: absolute;
+  z-index: 6;
+  left: var(--gutter);
+  bottom: 40vh;
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: var(--verm);
+  color: var(--ink);
+  font-weight: 500;
+}
+
+@media (max-width: 860px) {
+  .kalem-stage {
+    min-height: 156svh;
+  }
+
+  .kalem-in {
+    padding-top: 62svh;
+  }
+
+
+  .kalem-copy {
+    max-width: none;
+  }
+
+  .kalem-caption {
+    bottom: auto;
+    top: 44svh;
+  }
+
+}
+
+@media (max-width: 860px) {
+  .kalem-water {
+    left: 0;
+    width: 100%;
+  }
+}

@@ -1,0 +1,599 @@
+.platforms {
+  position: relative;
+  z-index: 10;
+  background: var(--blue);
+  color: var(--bone);
+  overflow-x: clip;
+}
+
+.platforms-in {
+  padding: clamp(90px, 14svh, 170px) var(--gutter) clamp(80px, 14svh, 160px);
+}
+
+.platforms-head {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  gap: clamp(24px, 4vw, 80px);
+  align-items: end;
+}
+
+.platforms-title {
+  max-width: 7em;
+}
+
+.platforms-head .lead {
+  padding-bottom: 0.5em;
+}
+
+.devices {
+  /* One design pixel: the devices are drawn on a 1500-wide sheet. */
+  --k: calc(min(100vw, 1790px) / 1500);
+  position: relative;
+  height: calc(720 * var(--k));
+  margin-top: clamp(40px, 8svh, 110px);
+}
+
+/* Every device is drawn at a fixed size and scaled as one piece. */
+.device {
+  position: absolute;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+
+.device-screen {
+  position: relative;
+  overflow: hidden;
+  background: #0d0d14;
+  border: calc(10 * var(--k)) solid var(--ink);
+  box-shadow: 0 0 0 calc(2 * var(--k)) var(--bone);
+}
+
+.device-laptop {
+  left: 50%;
+  top: calc(20 * var(--k));
+  width: calc(820 * var(--k));
+  margin-left: calc(-410 * var(--k));
+}
+
+.device-laptop .device-screen {
+  height: calc(520 * var(--k));
+  border-radius: calc(24 * var(--k)) calc(24 * var(--k)) calc(6 * var(--k)) calc(6 * var(--k));
+  box-shadow: none;
+}
+
+.device-base {
+  position: relative;
+  height: calc(22 * var(--k));
+  margin: calc(-1 * var(--k)) calc(-62 * var(--k)) 0;
+  border-radius: calc(4 * var(--k)) calc(4 * var(--k)) calc(22 * var(--k)) calc(22 * var(--k));
+  background: var(--ink);
+}
+
+/* The outline lies behind both parts, so it only shows around them. */
+.device-laptop::before,
+.device-laptop::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  background: var(--bone);
+}
+
+.device-laptop::before {
+  left: calc(-2 * var(--k));
+  right: calc(-2 * var(--k));
+  top: calc(-2 * var(--k));
+  height: calc(526 * var(--k));
+  border-radius: calc(26 * var(--k)) calc(26 * var(--k)) 0 0;
+}
+
+.device-laptop::after {
+  left: calc(-64 * var(--k));
+  right: calc(-64 * var(--k));
+  bottom: calc(-2 * var(--k));
+  height: calc(26 * var(--k));
+  border-radius: calc(6 * var(--k)) calc(6 * var(--k)) calc(24 * var(--k)) calc(24 * var(--k));
+}
+
+.device-base::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: calc(132 * var(--k));
+  height: calc(7 * var(--k));
+  margin-left: calc(-66 * var(--k));
+  border-radius: 0 0 calc(8 * var(--k)) calc(8 * var(--k));
+  background: #2b2b36;
+}
+
+.device-phone {
+  z-index: 3;
+  left: calc(30 * var(--k) - var(--gutter) * 0.6);
+  top: calc(150 * var(--k));
+  width: calc(272 * var(--k));
+}
+
+.device-phone .device-screen {
+  height: calc(560 * var(--k));
+  border-radius: calc(46 * var(--k));
+}
+
+.device-tablet {
+  z-index: 2;
+  right: calc(16 * var(--k) - var(--gutter) * 0.85);
+  top: calc(150 * var(--k));
+  width: calc(372 * var(--k));
+}
+
+.device-tablet .device-screen {
+  height: calc(500 * var(--k));
+  border-radius: calc(28 * var(--k));
+}
+
+/* Interfaces, drawn in a 1:1 grid and zoomed with the device */
+.ui {
+  position: absolute;
+  left: 0;
+  top: 0;
+  zoom: var(--z, 1);
+  color: var(--bone);
+  font-size: 14px;
+  line-height: 1.3;
+}
+
+.ui-picture {
+  position: relative;
+  overflow: hidden;
+}
+
+.ui-picture canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.ui-laptop {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  width: 800px;
+  height: 500px;
+}
+
+.ui-laptop aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding-top: 20px;
+  background: #08080d;
+}
+
+.ui-laptop aside svg {
+  width: 34px;
+  margin-bottom: 8px;
+}
+
+.ui-laptop aside i {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.ui-laptop aside i[data-on='true'] {
+  box-shadow:
+    0 0 0 3px #08080d,
+    0 0 0 5px var(--bone);
+}
+
+.ui-dash {
+  display: grid;
+  grid-template-rows: 262px 1fr;
+  overflow: hidden;
+}
+
+.ui-week {
+  position: relative;
+  background: var(--blue);
+}
+
+/* The same water as everywhere, in the blue of the dashboard */
+.ui-week .ui-picture {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: soft-light;
+  opacity: 0.5;
+  filter: grayscale(1);
+}
+
+.ui-week h4 {
+  position: absolute;
+  left: 24px;
+  top: 24px;
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 36px;
+  letter-spacing: -0.052em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.ui-balance {
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  display: flex;
+  align-items: flex-end;
+  gap: 9px;
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.2;
+}
+
+.ui-balance b {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 50px;
+  letter-spacing: -0.06em;
+  line-height: 0.76;
+}
+
+.ui-mates {
+  position: absolute;
+  left: 24px;
+  right: 0;
+  top: 106px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.ui-mates li {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.ui-mates .ring {
+  flex: none;
+  width: 66px;
+}
+
+.ui-mates p {
+  font-size: 13.5px;
+  font-weight: 550;
+  line-height: 1.15;
+}
+
+.ui-mates b {
+  display: block;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 24px;
+  letter-spacing: -0.05em;
+  line-height: 1.05;
+}
+
+.ui-mates [data-full='true'] b {
+  color: var(--saff);
+}
+
+.ui-paper {
+  position: relative;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 26px;
+  padding: 12px 24px 24px;
+  background: var(--bone);
+  color: var(--ink);
+}
+
+.ui-edge {
+  position: absolute;
+  left: 0;
+  bottom: calc(100% - 3px);
+  width: 100%;
+  height: 27px;
+}
+
+.ui-decide {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 18px 20px;
+  border-radius: 22px;
+  background: var(--saff);
+}
+
+.ui-decide span {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ui-decide b {
+  margin-top: 5px;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 29px;
+  letter-spacing: -0.045em;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.ui-decide p {
+  margin-top: 9px;
+  font-size: 14px;
+  font-weight: 550;
+}
+
+.ui-decide s {
+  margin: 0 3px;
+  opacity: 0.6;
+}
+
+.ui-decide em {
+  margin-top: auto;
+  padding: 10px 18px 12px;
+  border-radius: 15px;
+  background: var(--ink);
+  color: var(--bone);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.ui-next li {
+  display: grid;
+  grid-template-columns: 62px 1fr auto;
+  align-items: center;
+  height: 51px;
+  border-top: 1.5px solid rgb(8 8 13 / 15%);
+  font-size: 15.5px;
+  font-weight: 550;
+}
+
+.ui-next li:first-child {
+  border-top: 0;
+}
+
+.ui-next b {
+  font-size: 13.5px;
+  font-weight: 650;
+}
+
+.ui-next img {
+  width: 26px;
+  height: 33px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 2.5px var(--c);
+}
+
+.ui-tablet header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ui-tablet header b {
+  font-family: var(--display);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+}
+
+.ui-phone {
+  width: 252px;
+  height: 540px;
+}
+
+.ui-phone .ui-picture {
+  height: 236px;
+  border-radius: 0 0 26px 26px;
+}
+
+.ui-phone .ui-picture p {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  padding: 11px 15px 13px;
+  border-radius: 18px;
+  background: var(--ink);
+  font-size: 14px;
+  color: var(--bone-2);
+}
+
+.ui-phone .ui-picture b {
+  display: block;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  color: var(--bone);
+}
+
+.ui-phone ul {
+  padding: 14px 16px 0;
+}
+
+.ui-phone li {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 10px 0;
+}
+
+.ui-phone li + li {
+  border-top: 1px solid rgb(244 236 224 / 12%);
+}
+
+.ui-phone li > i {
+  position: relative;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1.5px rgb(244 236 224 / 40%);
+}
+
+.ui-phone li > i::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: calc(var(--p) * 100%);
+  background: var(--c);
+}
+
+.ui-phone li b {
+  display: block;
+  font-size: 15px;
+  font-weight: 550;
+}
+
+.ui-phone small {
+  font-size: 13px;
+  color: var(--bone-2);
+}
+
+.ui-proof {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 18px;
+  display: grid;
+  place-items: center;
+  height: 48px;
+  border-radius: 18px;
+  background: var(--bone);
+  color: var(--ink);
+  font-size: 15.5px;
+  font-weight: 600;
+}
+
+.ui-tablet {
+  width: 352px;
+  height: 480px;
+  padding: 18px;
+}
+
+.ui-tablet header {
+  font-size: 18px;
+}
+
+.ui-tablet header span {
+  padding: 4px 11px 5px;
+  border-radius: 10px;
+  background: var(--bone);
+  color: var(--ink);
+  font-size: 13.5px;
+  font-weight: 550;
+}
+
+.ui-tablet .ui-picture {
+  height: 196px;
+  margin-top: 14px;
+  border-radius: 18px;
+}
+
+.ui-tablet .ui-picture svg {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 158px;
+  margin: -79px 0 0 -79px;
+  padding: 10px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+
+.ui-tablet ul {
+  margin-top: 12px;
+}
+
+.ui-tablet li {
+  display: grid;
+  grid-template-columns: 18px 64px 1fr 40px;
+  align-items: center;
+  gap: 10px;
+  height: 41px;
+  font-size: 14.5px;
+}
+
+.ui-tablet li > i {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+}
+
+.ui-tablet li b {
+  font-weight: 500;
+}
+
+.ui-tablet li em {
+  font-style: normal;
+  text-align: right;
+  color: var(--bone-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.ui-bar {
+  height: 14px;
+  border-radius: 7px;
+  background: #1c1c26;
+  overflow: hidden;
+}
+
+.ui-bar i {
+  display: block;
+  height: 100%;
+  border-radius: 7px;
+}
+
+.systems {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px 40px;
+  margin-top: clamp(40px, 9svh, 120px);
+  padding-top: 26px;
+  border-top: 2px solid var(--bone);
+}
+
+.systems li {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(26px, 3.2vw, 60px);
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+
+@media (max-width: 860px) {
+  .platforms-head {
+    grid-template-columns: 1fr;
+  }
+
+  .devices {
+    --k: 0.62px;
+    height: calc(100vw * 0.56 + 520px);
+  }
+
+  /* All of the laptop, as wide as the phone in your hand */
+  .device-laptop {
+    --k: calc(100vw / 960);
+    left: 50%;
+    top: 0;
+  }
+
+  .device-phone {
+    left: 0;
+    top: calc(100vw * 0.56);
+  }
+
+  .device-tablet {
+    right: 0;
+    top: calc(100vw * 0.56 + 70px);
+  }
+}

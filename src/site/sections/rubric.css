@@ -1,0 +1,372 @@
+.rubric {
+  position: relative;
+  z-index: 7;
+  background: var(--teal);
+  color: var(--bone);
+}
+
+.rubric-in {
+  padding: clamp(80px, 12svh, 150px) var(--gutter) clamp(80px, 14svh, 160px);
+}
+
+.rubric-head {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  gap: clamp(24px, 4vw, 80px);
+  align-items: start;
+}
+
+.rubric-title {
+  font-size: clamp(46px, 7.2vw, 150px);
+  max-width: 8.2em;
+}
+
+.rubric-head .lead {
+  padding-top: 0.9em;
+}
+
+.rubric-drop {
+  position: relative;
+  z-index: 2;
+  margin: clamp(90px, 17svh, 190px) clamp(0px, 5.6vw, 130px) 0;
+}
+
+.rubric-sheet {
+  position: relative;
+  background: var(--bone);
+  color: var(--ink);
+  border-radius: 6px;
+  padding: clamp(18px, 2vw, 34px) clamp(14px, 1.8vw, 32px) clamp(18px, 2.2vw, 36px);
+  will-change: transform;
+}
+
+.rubric-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 30px;
+  padding-inline: clamp(4px, 0.8vw, 14px);
+  font-size: clamp(15px, 1.15vw, 19px);
+}
+
+.rubric-file {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.rubric-count b {
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.rubric-count em {
+  font-style: normal;
+  color: #8a3a1e;
+}
+
+.rubric-windows {
+  position: relative;
+  height: clamp(200px, 18.4vw, 420px);
+  margin-top: clamp(8px, 1.4svh, 18px);
+  overflow: hidden;
+  background: var(--saff);
+}
+
+.rubric-windows canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Dark water standing above the ink in every window. */
+.rubric-water {
+  position: absolute;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.rubric-water i {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background: var(--ink);
+  transition: height 1.9s var(--ease-spring);
+}
+
+.rubric-water i::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: calc(100% - 1px);
+  width: 100%;
+  height: 14px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='14' viewBox='0 0 120 14'%3E%3Cpath d='M0 0v5c20 0 20 8 40 8s20-9 40-9 20 7 40 1V0z' fill='%2308080d'/%3E%3C/svg%3E")
+    repeat-x;
+  animation: water 5s linear infinite;
+}
+
+.rubric-water:nth-child(odd) i::after {
+  animation-duration: 7s;
+  animation-direction: reverse;
+}
+
+@keyframes water {
+  to {
+    background-position-x: 120px;
+  }
+}
+
+.rubric-stencil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.rubric-rim {
+  fill: none;
+  stroke: var(--ink);
+}
+
+.rubric-live {
+  fill: none;
+  stroke: #8b857b;
+}
+
+.rubric-hit {
+  position: absolute;
+  z-index: 3;
+  border-radius: 14px;
+}
+
+.rubric-hit::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 2px;
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  border-radius: 50%;
+  background: var(--ink);
+  transform: scale(0);
+  transition: transform 0.5s var(--ease-spring);
+}
+
+.rubric-hit[aria-pressed='true']::after {
+  transform: scale(1);
+}
+
+.rubric-hit:focus-visible {
+  outline-offset: -4px;
+}
+
+.rubric-names {
+  display: grid;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.rubric-names button {
+  width: 100%;
+  padding: 6px 8px;
+  font-size: clamp(14.5px, 1.14vw, 19px);
+  font-weight: 550;
+  line-height: 1.2;
+  text-wrap: balance;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+
+.rubric-names li[data-on='true'] button,
+.rubric-names button:hover {
+  opacity: 1;
+}
+
+.rubric-names small {
+  display: block;
+  margin-top: 5px;
+  font-size: clamp(13.5px, 0.95vw, 16px);
+  font-weight: 400;
+  color: #6d665c;
+}
+
+.rubric-current {
+  display: none;
+  margin-top: 14px;
+  padding-inline: 4px;
+  font-size: 19px;
+  font-weight: 550;
+  line-height: 1.2;
+}
+
+.rubric-current small {
+  display: block;
+  margin-top: 4px;
+  font-size: 15px;
+  font-weight: 400;
+  color: #6d665c;
+}
+
+.rubric-hand {
+  --u: calc(21svmin / 700);
+  position: absolute;
+  z-index: 4;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.rubric-hand-l {
+  left: 16px;
+  top: 10px;
+}
+
+.rubric-hand-r {
+  right: 16px;
+  top: 10px;
+}
+
+.rubric-detail {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr 1fr;
+  gap: clamp(24px, 3.6vw, 72px);
+  margin-top: clamp(44px, 7svh, 80px);
+  min-height: 190px;
+}
+
+.rubric-detail h3 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(23px, 1.9vw, 34px);
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+.rubric-detail p,
+.rubric-detail ul {
+  font-size: clamp(16px, 1.2vw, 20px);
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+.rubric-detail li {
+  position: relative;
+  padding-left: 26px;
+}
+
+.rubric-detail li + li {
+  margin-top: 5px;
+}
+
+.rubric-detail li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.42em;
+  width: 13px;
+  height: 13px;
+  border-radius: 50% 50% 50% 0;
+  rotate: 135deg;
+  background: var(--saff);
+}
+
+.swap {
+  animation: swap 0.6s var(--ease-out);
+}
+
+@keyframes swap {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+.rubric-add {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 390px;
+  margin-top: 16px;
+  padding: 13px 18px 13px 13px;
+  border-radius: 18px;
+  background: var(--ink);
+  color: var(--bone);
+  text-align: left;
+  line-height: 1.25;
+  transition:
+    background 0.3s,
+    transform 0.4s var(--ease-out);
+}
+
+.rubric-add:not(:disabled):hover {
+  transform: translateY(-3px);
+}
+
+.rubric-add[data-done='true'] {
+  background: var(--bone);
+  color: var(--ink);
+  cursor: default;
+}
+
+.rubric-add i {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  transition: border-radius 0.5s var(--ease-spring);
+}
+
+.rubric-add:not(:disabled):hover i {
+  border-radius: 50% 50% 50% 14%;
+}
+
+.rubric-add b {
+  display: block;
+  font-size: 16.5px;
+  font-weight: 600;
+}
+
+.rubric-add small {
+  font-size: 14.5px;
+  opacity: 0.74;
+}
+
+.rubric-note {
+  margin-top: clamp(36px, 6svh, 70px);
+  max-width: 44em;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: rgb(244 236 224 / 84%);
+}
+
+.rubric .hand-skin {
+  fill: var(--ink);
+}
+
+.rubric .hand-seam {
+  stroke: var(--ink);
+}
+
+@media (max-width: 860px) {
+  .rubric-head,
+  .rubric-detail {
+    grid-template-columns: 1fr;
+  }
+
+  .rubric-windows {
+    height: 320px;
+  }
+
+  .rubric-names {
+    display: none;
+  }
+
+  .rubric-current {
+    display: block;
+  }
+}

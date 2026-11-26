@@ -1,0 +1,52 @@
+{
+  "note": "Files this project keeps a copy of. The original lives in the named sibling repository; npm run sync copies it again.",
+  "from": {
+    "Platform": [
+      "src/app/home/Edge.tsx",
+      "src/app/home/Ring.tsx",
+      "src/app/home/prints.ts",
+      "src/app/home/ring.css",
+      "src/app/home/week.ts",
+      "src/app/people.ts",
+      "src/brand/Mark.tsx",
+      "src/brand/digits.ts",
+      "src/brand/ebru.css",
+      "src/brand/flower.ts",
+      "src/brand/fonts.ts",
+      "src/brand/hands.ts",
+      "src/brand/palette.ts",
+      "src/brand/wordmark.ts",
+      "src/data/atlas.ts",
+      "src/engine/calendar.ts",
+      "src/engine/fairguard.ts",
+      "src/engine/fairproof.ts",
+      "src/engine/rubric.ts",
+      "src/engine/types.ts",
+      "src/ink/Marble.ts",
+      "src/ink/comb.ts",
+      "src/ink/device.ts",
+      "src/ink/idle.ts",
+      "src/ink/pick.ts",
+      "src/ink/quality.ts",
+      "src/ink/random.ts",
+      "src/ink/shader.ts",
+      "src/ink/sheet.ts",
+      "src/ink/stir.ts",
+      "src/ink/texture.ts",
+      "src/ink/uniforms.ts",
+      "src/ink/useInk.ts",
+      "src/kalem/Squid.ts",
+      "src/kalem/anatomy.ts",
+      "src/kalem/inks.ts",
+      "src/kalem/skin.ts"
+    ],
+    "Kalem-Presentation": [
+      "src/content/kalem.json",
+      "src/content/kalem.ts"
+    ],
+    "Presentation": [
+      "src/ink/SoftHint.tsx",
+      "src/ink/softhint.css"
+    ]
+  }
+}

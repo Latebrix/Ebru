@@ -1,0 +1,227 @@
+.hero {
+  position: relative;
+  height: 250vh;
+  height: 250svh;
+  background: var(--ink);
+}
+
+.hero-pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  min-height: 560px;
+  overflow: hidden;
+}
+
+.hero-ink {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  touch-action: pan-y;
+  cursor: crosshair;
+}
+
+.hero-word {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  visibility: hidden;
+  color: var(--bone);
+}
+
+.hero-word > div {
+  width: min(44vw, 620px);
+  padding-block: 1%;
+}
+
+.hero-word svg {
+  width: 100%;
+  overflow: visible;
+}
+
+/* Shown once the opening has cleared. */
+.hero-copy,
+.hero-def,
+.hero-hint {
+  visibility: hidden;
+}
+
+.hero-copy {
+  position: absolute;
+  z-index: 2;
+  left: var(--gutter);
+  top: clamp(112px, 17.4svh, 220px);
+  width: min(52vw, 980px);
+  pointer-events: none;
+}
+
+.hero-copy > * {
+  pointer-events: auto;
+}
+
+.hero-title {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(52px, min(8.05vw, 14.4svh), 178px);
+  line-height: 0.95;
+  letter-spacing: -0.052em;
+  margin-left: -0.045em;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.hero-title .mask-line-mask {
+  padding-block: 0.06em 0.14em;
+  margin-block: -0.06em -0.14em;
+}
+
+.hero-sub {
+  margin-top: clamp(20px, 3.4svh, 42px);
+  max-width: 25em;
+  font-size: clamp(17px, 1.36vw, 23px);
+  line-height: 1.45;
+  color: var(--bone-2);
+  text-wrap: pretty;
+}
+
+.hero-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: clamp(24px, 4svh, 48px);
+}
+
+.hero-def {
+  position: absolute;
+  z-index: 2;
+  left: var(--gutter);
+  bottom: clamp(24px, 4.6svh, 56px);
+  width: min(370px, 60vw);
+  font-size: clamp(14px, 1.05vw, 17px);
+  line-height: 1.45;
+  color: var(--bone-2);
+  text-wrap: pretty;
+  pointer-events: none;
+}
+
+.hero-def b {
+  font-weight: 600;
+  color: var(--bone);
+}
+
+.hero-hint {
+  position: absolute;
+  z-index: 2;
+  right: var(--gutter);
+  bottom: clamp(24px, 4.6svh, 56px);
+  padding: 9px 15px;
+  border-radius: 11px;
+  background: rgb(8 8 13 / 82%);
+  font-size: 14px;
+  color: var(--bone);
+  pointer-events: none;
+}
+
+.arm-peek {
+  position: absolute;
+  z-index: 3;
+  right: 12%;
+  bottom: 0;
+  pointer-events: none;
+}
+
+/* Reading a drop */
+.reader {
+  position: absolute;
+  z-index: 4;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+}
+
+.reader-in {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  padding: 9px 16px 10px 10px;
+  border-radius: 15px;
+  background: var(--ink);
+  color: var(--bone);
+  white-space: nowrap;
+  line-height: 1.2;
+  transform: scale(0.7);
+  transform-origin: 0 0;
+  opacity: 0;
+  transition:
+    transform 0.28s var(--ease-out),
+    opacity 0.18s;
+}
+
+.reader[data-on='true'] .reader-in {
+  transform: none;
+  opacity: 1;
+}
+
+.reader i {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--c, var(--bone));
+  transition: background 0.2s;
+}
+
+.reader b {
+  display: block;
+  font-size: 14.5px;
+  font-weight: 600;
+}
+
+.reader small {
+  font-size: 13px;
+  color: var(--bone-2);
+}
+
+@media (hover: none) {
+  .arm-peek,
+  .reader,
+  .hero-hint {
+    display: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .hero-copy {
+    width: auto;
+    right: var(--gutter);
+    top: 96px;
+  }
+
+  .hero-title {
+    font-size: clamp(46px, 13.6vw, 104px);
+  }
+
+  .hero-sub {
+    max-width: 22em;
+  }
+
+  .hero-sub {
+    max-width: 18em;
+  }
+
+  .hero-def {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero {
+    height: 200vh;
+    height: 200svh;
+  }
+}

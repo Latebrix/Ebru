@@ -1,0 +1,138 @@
+@import '../brand/ebru.css';
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-stopped {
+  overflow: clip;
+}
+
+main {
+  position: relative;
+}
+
+main,
+footer {
+  overflow-x: clip;
+}
+
+.display {
+  font-family: var(--display);
+  font-weight: 500;
+  letter-spacing: -0.05em;
+  line-height: 0.96;
+  text-wrap: balance;
+}
+
+.h-xl {
+  font-size: clamp(46px, 7.2vw, 150px);
+}
+
+.h-lg {
+  font-size: clamp(40px, 5.6vw, 112px);
+}
+
+.lead {
+  font-size: clamp(17px, 1.34vw, 23px);
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+/* Lines revealed by SplitText slide out of their own mask. */
+.mask-line-mask {
+  padding-block: 0.08em 0.16em;
+  margin-block: -0.08em -0.16em;
+}
+
+/* Buttons */
+.btn {
+  --dx: 50%;
+  --dy: 50%;
+  --drop: var(--verm);
+  --drop-text: var(--ink);
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  padding: 0 22px;
+  border-radius: 14px;
+  overflow: hidden;
+  font-weight: 550;
+  font-size: 16px;
+  white-space: nowrap;
+  transition:
+    color 0.25s,
+    box-shadow 0.25s;
+}
+
+.btn-label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-drop {
+  position: absolute;
+  z-index: -1;
+  left: var(--dx);
+  top: var(--dy);
+  width: 520px;
+  height: 520px;
+  margin: -260px 0 0 -260px;
+  border-radius: 50%;
+  background: var(--drop);
+  transform: scale(0);
+  transition: transform 0.65s var(--ease-out);
+}
+
+@media (hover: hover) {
+  .btn:hover .btn-drop {
+    transform: scale(1);
+  }
+
+  .btn:hover {
+    color: var(--drop-text) !important;
+  }
+
+  .btn-line:hover {
+    box-shadow: inset 0 0 0 1.5px transparent;
+  }
+}
+
+.btn:active .btn-label {
+  transform: translateY(1px);
+}
+
+.btn-solid {
+  background: var(--bone);
+  color: var(--ink);
+}
+
+.btn-line {
+  color: var(--bone);
+  background: rgb(8 8 13 / 46%);
+  box-shadow: inset 0 0 0 1.5px rgb(244 236 224 / 28%);
+}
+
+.btn-ink {
+  background: var(--ink);
+  color: var(--bone);
+}
+
+.nav .btn {
+  height: 46px;
+  font-size: 15.5px;
+  padding: 0 20px;
+  border-radius: 13px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-drop {
+    transition: none;
+  }
+}

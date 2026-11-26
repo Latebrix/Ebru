@@ -1,0 +1,250 @@
+.set {
+  position: relative;
+  z-index: 4;
+  background: var(--pink);
+  color: var(--ink);
+}
+
+.set-pin {
+  position: relative;
+  overflow: hidden;
+}
+
+.set-track {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  width: max-content;
+  height: 100vh;
+  height: 100svh;
+  min-height: 620px;
+  padding-inline: var(--gutter) calc(var(--gutter) * 2);
+  will-change: transform;
+}
+
+.rope {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 13.5svh;
+  width: 100%;
+  height: 60px;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.rope path {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2.5;
+}
+
+.set-intro {
+  align-self: center;
+  flex: none;
+  width: min(46vw, 900px);
+  padding-right: 4vw;
+  margin-top: 7svh;
+}
+
+.set-intro p {
+  max-width: 25em;
+  margin-top: clamp(20px, 3.4svh, 40px);
+}
+
+.print {
+  --w: min(30vw, 51svh);
+  position: relative;
+  z-index: 2;
+  flex: none;
+  width: var(--w);
+  margin-top: 14.6svh;
+  margin-right: clamp(36px, 5.2vw, 104px);
+}
+
+.print-hang {
+  position: relative;
+  transform-origin: 50% 0;
+  transform: rotate(var(--sway, 0deg));
+  will-change: transform;
+}
+
+.peg {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: -16px;
+  width: 22px;
+  margin-left: -11px;
+  overflow: visible;
+}
+
+.peg rect {
+  fill: var(--saff);
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.peg .peg-wire {
+  fill: var(--ink);
+  stroke: none;
+}
+
+.print-flip {
+  display: block;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  perspective: 1400px;
+  transform-style: preserve-3d;
+  border-radius: 4px;
+}
+
+.print-face {
+  position: absolute;
+  inset: 0;
+  padding: clamp(9px, 0.95vw, 16px);
+  background: var(--bone);
+  border-radius: 4px;
+  backface-visibility: hidden;
+  transition: transform 0.95s var(--ease-spring);
+  overflow: hidden;
+}
+
+.print-front img,
+.print-blank {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: var(--ink);
+  border-radius: 2px;
+}
+
+.print-back {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+  padding: clamp(20px, 2.2vw, 38px);
+  text-align: left;
+  color: var(--ink);
+  transform: rotateY(-180deg);
+}
+
+.print-back i {
+  display: block;
+  font-style: normal;
+  font-size: clamp(14px, 1.05vw, 18px);
+  color: #6d665c;
+}
+
+.print-back b {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(21px, 1.95vw, 36px);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.print-flip[data-flipped='true'] .print-front {
+  transform: rotateY(180deg);
+}
+
+.print-flip[data-flipped='true'] .print-back {
+  transform: rotateY(0deg);
+}
+
+@media (hover: hover) {
+  .print-flip:hover .print-front {
+    transform: rotateY(16deg);
+  }
+
+  .print-flip[data-flipped='true']:hover .print-front {
+    transform: rotateY(180deg);
+  }
+
+  .print-flip[data-flipped='true']:hover .print-back {
+    transform: rotateY(-12deg);
+  }
+}
+
+.print figcaption {
+  margin-top: clamp(16px, 2.4svh, 28px);
+}
+
+.print h3 {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(24px, 2.05vw, 40px);
+  letter-spacing: -0.04em;
+  line-height: 1.1;
+}
+
+.print figcaption p {
+  margin-top: 5px;
+  font-size: clamp(15.5px, 1.16vw, 20px);
+  line-height: 1.35;
+  max-width: 20em;
+}
+
+.set-end {
+  align-self: center;
+  flex: none;
+  width: min(40vw, 760px);
+  margin-top: 7svh;
+  padding-left: 2vw;
+}
+
+.set-end .lead {
+  margin-top: clamp(18px, 3svh, 36px);
+  max-width: 24em;
+}
+
+.cite {
+  margin-top: 18px;
+  max-width: 30em;
+  font-size: 14px;
+  line-height: 1.45;
+  color: rgb(8 8 13 / 66%);
+}
+
+@media (max-width: 860px) {
+  .set-pin {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .set-track {
+    height: auto;
+    min-height: 0;
+    padding-block: 90px 80px;
+    align-items: stretch;
+  }
+
+  .rope {
+    top: 100px;
+  }
+
+  .set-intro,
+  .set-end {
+    width: 84vw;
+    margin-top: 40px;
+    scroll-snap-align: center;
+  }
+
+  .print {
+    --w: 72vw;
+    margin-top: 24px;
+    margin-right: 7vw;
+    scroll-snap-align: center;
+  }
+
+  .print h3 {
+    font-size: 27px;
+  }
+}

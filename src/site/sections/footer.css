@@ -1,0 +1,80 @@
+.footer {
+  position: relative;
+  z-index: 11;
+  background: var(--ink);
+  color: var(--bone);
+}
+
+.footer-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(26px, 4.6svh, 54px);
+  padding: clamp(70px, 12svh, 140px) var(--gutter) clamp(60px, 10svh, 120px);
+  text-align: center;
+}
+
+.footer-title {
+  font-size: clamp(46px, 8.6vw, 184px);
+  max-width: 7.6em;
+}
+
+.footer-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+.footer-word {
+  position: relative;
+  width: calc(100% - var(--gutter) * 2);
+  margin-inline: auto;
+  cursor: crosshair;
+  transform-origin: 50% 100%;
+}
+
+.footer-word canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--verm);
+  mask-size: 100% 100%;
+  -webkit-mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+}
+
+.footer-end {
+  display: grid;
+  grid-template-columns: minmax(0, 2.4fr) minmax(0, 1.6fr) auto;
+  gap: 16px clamp(24px, 5vw, 100px);
+  align-items: end;
+  padding: clamp(36px, 6svh, 70px) var(--gutter) clamp(24px, 4svh, 44px);
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: var(--bone-2);
+}
+
+.footer-end p {
+  max-width: 46em;
+  text-wrap: pretty;
+}
+
+.footer-end a {
+  color: var(--bone);
+  border-bottom: 1.5px solid currentColor;
+  padding-bottom: 2px;
+  white-space: nowrap;
+}
+
+@media (max-width: 860px) {
+  .footer-end {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-end a {
+    justify-self: start;
+  }
+}
