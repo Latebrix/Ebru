@@ -1,8 +1,8 @@
-import { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
-import { pull } from "../ink/comb.ts";
-import { lightDevice } from "../ink/device.ts";
-import { reducedMotion } from "../ink/quality.ts";
-import { gsap } from "../site/motion.ts";
+import { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
+import { pull } from '../ink/comb.ts';
+import { lightDevice } from '../ink/device.ts';
+import { reducedMotion } from '../ink/quality.ts';
+import { gsap } from '../site/motion.ts';
 
 export interface FloodHandle {
   /**
@@ -15,7 +15,7 @@ export interface FloodHandle {
 
 /** Seconds from the first band at the bottom to a covered screen. */
 const RISE = 0.78;
-const VEIN = "#f4ece0";
+const VEIN = '#f4ece0';
 
 export const Flood = forwardRef<FloodHandle>(function Flood(_, handle) {
   const ref = useRef<HTMLCanvasElement>(null);
@@ -31,39 +31,33 @@ export const Flood = forwardRef<FloodHandle>(function Flood(_, handle) {
         covered();
         return;
       }
-      const ctx = canvas.getContext("2d");
+      const ctx = canvas.getContext('2d');
       if (!ctx) {
         covered();
         return;
       }
-      const dpr = Math.min(
-        window.devicePixelRatio || 1,
-        lightDevice() ? 1.5 : 2,
-      );
+      const dpr = Math.min(window.devicePixelRatio || 1, lightDevice() ? 1.5 : 2);
       const w = Math.round(window.innerWidth * dpr);
       const h = Math.round(window.innerHeight * dpr);
       canvas.width = w;
       canvas.height = h;
-      canvas.style.visibility = "visible";
+      canvas.style.visibility = 'visible';
       const n = bands.length;
       const seam = Math.min(h * 0.34, 300 * dpr);
-      const spacing = Math.max(
-        84 * dpr,
-        w / Math.max(4, (11 * w) / (1440 * dpr)),
-      );
+      const spacing = Math.max(84 * dpr, w / Math.max(4, (11 * w) / (1440 * dpr)));
       const state = { p: 0 };
       let done = false;
-      canvas.style.opacity = "1";
+      canvas.style.opacity = '1';
       const fade = () =>
         requestAnimationFrame(() =>
           gsap.to(canvas, {
             opacity: 0,
             duration: 0.22,
-            ease: "power1.out",
+            ease: 'power1.out',
             onComplete: () => {
               ctx.clearRect(0, 0, w, h);
-              canvas.style.visibility = "hidden";
-              canvas.style.opacity = "1";
+              canvas.style.visibility = 'hidden';
+              canvas.style.opacity = '1';
             },
           }),
         );
@@ -81,12 +75,7 @@ export const Flood = forwardRef<FloodHandle>(function Flood(_, handle) {
           ctx.moveTo(-10, h + 10);
           for (let x = -step; x <= w + step; x += step) {
             const u = x / spacing + 0.18 + i * 0.012;
-            ctx.lineTo(
-              x,
-              rest +
-                pull(u) * depth * 0.62 +
-                Math.sin(x / (spacing * 2.7) + i * 0.5) * seam * 0.02,
-            );
+            ctx.lineTo(x, rest + pull(u) * depth * 0.62 + Math.sin(x / (spacing * 2.7) + i * 0.5) * seam * 0.02);
           }
           ctx.lineTo(w + 10, h + 10);
           ctx.closePath();
@@ -109,7 +98,7 @@ export const Flood = forwardRef<FloodHandle>(function Flood(_, handle) {
       running.current = gsap.to(state, {
         p: 1,
         duration: RISE * 1.3,
-        ease: "power2.inOut",
+        ease: 'power2.inOut',
         onUpdate: draw,
         onComplete: () => {
           if (done) return;
