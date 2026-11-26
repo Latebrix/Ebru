@@ -57,7 +57,7 @@ export function Hands() {
       const mm = gsap.matchMedia();
       mm.add({ wide: '(min-width: 861px)', tall: '(max-width: 860px)' }, (context) => {
         const { tall } = context.conditions as { tall: boolean };
-        scene.current.aim = tall ? [0, 0.16] : [0.16, 0];
+        scene.current.aim = tall ? [0, 0.26] : [0.16, 0];
         const words = ['.say-1', '.say-2', '.say-3'].map((sel) => new SplitText(q(sel), { type: 'lines,words,chars', linesClass: 'mask-line', mask: 'lines', charsClass: 'say-char' }));
         if (still) {
           gsap.set(q('.hands-arm, .hands-fall, .say-1'), { autoAlpha: 0 });
@@ -68,7 +68,8 @@ export function Hands() {
           defaults: { ease: 'none' },
           scrollTrigger: {
             trigger: q('.hands-track')[0],
-            start: 'top top',
+            // The first words come while the section is still arriving, so the screen is never empty.
+            start: 'top 60%',
             end: 'bottom bottom',
             scrub: 0.5,
             onUpdate: (self) => {
@@ -115,10 +116,11 @@ export function Hands() {
           tl.to(arm, { x: () => `${seat.from[0] * far * 100}vmin`, y: () => `${seat.from[1] * far * 100}vmin`, rotate: seat.from[0] * 20, duration: 0.13, ease: 'power2.in' }, BEATS.pull[0] + 0.07);
         });
 
-        tl.fromTo(words[1].chars, { yPercent: 120, rotate: 8 }, { yPercent: 0, rotate: 0, stagger: 0.003, duration: 0.06, ease: 'power3.out' }, 0.72);
-        tl.fromTo(words[2].chars, { yPercent: 120, rotate: 6 }, { yPercent: 0, rotate: 0, stagger: 0.002, duration: 0.06, ease: 'power3.out' }, 0.78);
-        tl.fromTo(q('.share'), { x: -30, autoAlpha: 0 }, { x: 0, autoAlpha: 1, stagger: 0.012, duration: 0.05, ease: 'power2.out' }, 0.83);
-        tl.fromTo(q('.hands-note'), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.04 }, 0.9);
+        const late = tall ? 0.09 : 0;
+        tl.fromTo(words[1].chars, { yPercent: 120, rotate: 8 }, { yPercent: 0, rotate: 0, stagger: 0.003, duration: 0.06, ease: 'power3.out' }, 0.72 + late);
+        tl.fromTo(words[2].chars, { yPercent: 120, rotate: 6 }, { yPercent: 0, rotate: 0, stagger: 0.002, duration: 0.06, ease: 'power3.out' }, 0.78 + late * 0.8);
+        tl.fromTo(q('.share'), { x: -30, autoAlpha: 0 }, { x: 0, autoAlpha: 1, stagger: 0.012, duration: 0.05, ease: 'power2.out' }, 0.83 + late * 0.6);
+        tl.fromTo(q('.hands-note'), { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.04 }, 0.9 + late * 0.4);
       });
       ScrollTrigger.refresh();
       return () => mm.revert();

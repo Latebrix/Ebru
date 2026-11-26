@@ -204,9 +204,11 @@ export class HeroScene implements InkScene {
 
     // Framing: the ink sits right of the headline, under it on narrow screens, and fills the view as you scroll.
     const narrow = clamp((1.25 - aspect) / 0.75);
+    // On a phone the words take the top of the screen, so the ink starts below the buttons.
+    const phone = clamp((0.75 - aspect) / 0.25);
     const scale0 = lerp(1, 1.16, narrow);
     const sx = lerp(-0.05, 0.5, narrow);
-    const sy = lerp(0, 0.74, narrow);
+    const sy = lerp(0, 0.74, narrow) + 0.36 * phone;
     s.scale = lerp(scale0, scale0 * 0.8, p);
     s.shift = [lerp(sx, 0.36, p), lerp(sy, -0.06, p)];
 

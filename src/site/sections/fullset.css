@@ -205,6 +205,7 @@
 }
 
 .cite {
+  overflow-wrap: anywhere;
   margin-top: 18px;
   max-width: 30em;
   font-size: 14px;
@@ -213,35 +214,56 @@
 }
 
 @media (max-width: 860px) {
-  .set-pin {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-  }
-
   .set-track {
+    flex-direction: column;
+    align-items: stretch;
+    width: auto;
     height: auto;
     min-height: 0;
-    padding-block: 90px 80px;
-    align-items: stretch;
+    padding: 92px var(--gutter) 88px;
   }
 
+  /* One long line does not fit a column: every print gets its own. */
   .rope {
-    top: 100px;
+    display: none;
   }
 
   .set-intro,
   .set-end {
-    width: 84vw;
-    margin-top: 40px;
-    scroll-snap-align: center;
+    align-self: stretch;
+    width: auto;
+    margin-top: 0;
+    padding: 0;
   }
 
   .print {
-    --w: 72vw;
-    margin-top: 24px;
-    margin-right: 7vw;
-    scroll-snap-align: center;
+    --w: min(76vw, 400px);
+    align-self: center;
+    margin: 76px 0 0;
+  }
+
+  .print::before {
+    content: '';
+    position: absolute;
+    z-index: 1;
+    left: calc(50% - 50vw);
+    right: calc(50% - 50vw);
+    top: -6px;
+    height: 2.5px;
+    background: var(--ink);
+    pointer-events: none;
+  }
+
+  .print figcaption {
+    text-align: center;
+  }
+
+  .print figcaption p {
+    margin-inline: auto;
+  }
+
+  .set-end {
+    margin-top: 72px;
   }
 
   .print h3 {

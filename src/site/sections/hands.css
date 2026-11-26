@@ -176,9 +176,13 @@
     --u: calc(30svmin / 700);
   }
 
+  .hands-track {
+    height: 460vh;
+    height: 460svh;
+  }
+
   .hands-result {
-    top: auto;
-    bottom: 84px;
+    top: 47svh;
     translate: none;
     width: auto;
     right: var(--gutter);

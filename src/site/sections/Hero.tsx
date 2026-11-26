@@ -113,11 +113,16 @@ export function Hero({ onPour }: { onPour: () => void }) {
         },
       });
       gsap
-        .timeline({ scrollTrigger: { trigger: root.current, start: 'top top', end: '+=60%', scrub: 0.4 } })
+        .timeline({ scrollTrigger: { trigger: root.current, start: 'top top', end: '+=60%', scrub: 0.4, invalidateOnRefresh: true } })
         .fromTo(
           split.masks,
           { x: 0 },
-          { x: (i) => (i === 0 ? '-58vw' : '-72vw'), rotate: (i) => (i === 0 ? -5 : 4), ease: 'power2.in' },
+          {
+            // Far enough that not a letter is left behind, on any screen.
+            x: (i: number, el: Element) => -(el.getBoundingClientRect().right + window.innerWidth * (i === 0 ? 0.06 : 0.2)),
+            rotate: (i) => (i === 0 ? -5 : 4),
+            ease: 'power2.in',
+          },
           0,
         )
         .fromTo(q('.hero-fade'), { y: 0, opacity: 1 }, { y: -60, opacity: 0, stagger: 0.04, ease: 'power1.in', immediateRender: false }, 0);
@@ -134,6 +139,7 @@ export function Hero({ onPour }: { onPour: () => void }) {
           </div>
         </div>
         <canvas className="hero-ink" ref={canvas} aria-hidden="true" />
+        <i className="hero-shade hero-fade" aria-hidden="true" />
         <div className="hero-copy">
           <h1 className="hero-title">
             Group work,

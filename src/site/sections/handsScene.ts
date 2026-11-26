@@ -106,9 +106,11 @@ export class HandsScene implements InkScene {
     const wob = (this.still ? 0 : 1) * (0.5 + 0.5 * pull);
     s.warp = [0.035 * wob + 0.02, 2.1, 0.2 * Math.sin(t * 0.14), 0.2 * Math.cos(t * 0.11)];
     const tall = aspect < 0.9;
-    const zoom = tall ? lerp(1.5, 1.42, settle) : lerp(1.16, 1.05, settle);
+    // On a phone the flower moves up early and keeps the lower half for the words that follow.
+    const move = tall ? smooth(span(p, 0.62, 0.8)) : settle;
+    const zoom = tall ? lerp(1.5, 2.25, move) : lerp(1.16, 1.05, settle);
     s.scale = zoom;
-    s.shift = [-this.aim[0] * aspect * zoom * settle, -this.aim[1] * zoom * settle];
+    s.shift = [-this.aim[0] * aspect * zoom * move, -this.aim[1] * zoom * move];
 
     // Reading: one person's ink stays lit, the others step back.
     const keep = this.focus ?? this.hovered;
