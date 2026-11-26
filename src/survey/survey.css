@@ -83,47 +83,19 @@ html:has(.sv-shell) {
   visibility: hidden;
 }
 
+/* One column, one thing under the other, as wide as the screen allows. */
 .sv-page {
   display: flex;
   flex-direction: column;
-  gap: clamp(18px, 3vh, 28px);
-  width: min(100%, 1240px);
+  gap: clamp(18px, 3vh, 30px);
+  width: min(100%, 1120px);
   margin: 0 auto;
   padding: clamp(22px, 5vh, 64px) var(--gutter) 56px;
 }
 
 .sv-left,
 .sv-right {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(18px, 3vh, 28px);
-  min-width: 0;
-}
-
-/* On a wide screen the question stands on the left and the answers fill the right. */
-@media (min-width: 980px) {
-  .sv-two {
-    display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-    gap: 40px clamp(56px, 6vw, 112px);
-    align-items: start;
-    min-height: 100svh;
-    padding-top: clamp(40px, 9vh, 110px);
-  }
-
-  .sv-left {
-    position: sticky;
-    top: clamp(40px, 9vh, 110px);
-  }
-
-  .sv-right-end {
-    padding-top: clamp(80px, 16vh, 200px);
-  }
-
-  .sv-welcome.sv-two {
-    min-height: 0;
-    padding-top: clamp(24px, 4vh, 48px);
-  }
+  display: contents;
 }
 
 /* Thank-you and already-answered: in the middle of the screen. */
@@ -370,7 +342,7 @@ html:has(.sv-shell) {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  width: min(100%, 560px);
+  width: 100%;
 }
 
 .sv-drops {
@@ -382,7 +354,7 @@ html:has(.sv-shell) {
 .sv-drops button {
   display: grid;
   place-items: center;
-  width: clamp(56px, 15.5vw, 92px);
+  width: clamp(56px, 15.5vw, 112px);
   aspect-ratio: 1;
   border-radius: 50%;
   background: var(--c);
