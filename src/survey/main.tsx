@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import '../brand/fonts.ts';
-import '../brand/ebru.css';
+import '../site/site.css';
 import './survey.css';
 import { Survey } from './Survey.tsx';
 
