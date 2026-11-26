@@ -1,10 +1,9 @@
 <div align="center">
 
-<a href="https://ebru.ink"><img src=".github/assets/hero.webp" alt="ebru. Group work, in full color." width="100%" /></a>
+<a href="https://ebru.ink"><img src=".github/assets/cover.webp" alt="ebru. Group work, in full color." width="100%" /></a>
 
-<h1>ebru</h1>
-
-<h3>Group work, in full color.</h3>
+<br />
+<br />
 
 <p>
 An AI-powered board for teamwork and workload evaluation.<br />
