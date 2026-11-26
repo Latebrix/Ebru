@@ -17,6 +17,7 @@ export default defineConfig({
       input: {
         site: resolve(root, 'index.html'),
         ask: resolve(root, 'ask.html'),
+        survey: resolve(root, 'survey.html'),
       },
     },
   },
