@@ -92,11 +92,12 @@ export function Hero({ onPour }: { onPour: () => void }) {
       if (!poured) return;
       const q = gsap.utils.selector(root);
       gsap.set(word.current, { autoAlpha: 0 });
-      gsap.set(q('.hero-copy, .hero-def, .hero-hint'), { visibility: 'inherit' });
+      gsap.set(q('.hero-copy, .hero-def, .hero-hint, .hero-shade'), { visibility: 'inherit' });
       const split = new SplitText(q('.hero-title'), { type: 'lines,chars', linesClass: 'mask-line', mask: 'lines' });
       if (!reducedMotion()) {
         gsap
           .timeline()
+          .from(q('.hero-shade'), { opacity: 0, duration: 1.2, ease: 'power1.out' }, 0)
           .from(split.chars, { yPercent: 118, rotate: 7, transformOrigin: '0% 100%', stagger: 0.022, duration: 1.15 }, 0.1)
           .from(q('.hero-sub'), { y: 26, opacity: 0, duration: 1.1 }, 0.7)
           .from(q('.hero-row > *'), { y: 22, opacity: 0, stagger: 0.09, duration: 1 }, 0.85)
@@ -139,7 +140,10 @@ export function Hero({ onPour }: { onPour: () => void }) {
           </div>
         </div>
         <canvas className="hero-ink" ref={canvas} aria-hidden="true" />
-        <i className="hero-shade hero-fade" aria-hidden="true" />
+        {/* The shade comes in with the words; its inner layer leaves with them on scroll. */}
+        <div className="hero-shade" aria-hidden="true">
+          <i className="hero-fade" />
+        </div>
         <div className="hero-copy">
           <h1 className="hero-title">
             Group work,

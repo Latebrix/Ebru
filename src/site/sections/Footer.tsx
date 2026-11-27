@@ -13,6 +13,23 @@ import { LINKS } from '../../links.ts';
 
 const EDGE = ['#ffb43a', '#f4ece0', '#ff9ec2', '#08080d'];
 
+/** Our sponsor on a perforated stamp, as in the deck, in the words BrowserStack agreed to. The site names it only; amounts stay in the deck. */
+function Sponsor() {
+  return (
+    <aside className="sponsor" aria-label="Our sponsor">
+      <div className="sponsor-paper">
+        <div className="sponsor-who">
+          <p className="sponsor-by">Sponsored by</p>
+          <a href="https://www.browserstack.com" target="_blank" rel="sponsored noopener noreferrer">
+            <img src="./ebru/sponsor-browserstack.webp" alt="BrowserStack" width="640" height="146" loading="lazy" decoding="async" />
+          </a>
+        </div>
+        <p className="sponsor-line">This project is tested with BrowserStack. BrowserStack sponsors the testing infrastructure for this project.</p>
+      </div>
+    </aside>
+  );
+}
+
 export function Footer() {
   const root = useRef<HTMLElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
@@ -33,6 +50,8 @@ export function Footer() {
       revealTitle(q('.footer-title')[0], q('.footer-top')[0], 'top 70%');
       revealCopy(q('.footer-row'), q('.footer-top')[0], 'top 66%', 0.3);
       gsap.fromTo(q('.footer-word'), { yPercent: 26, scale: 0.94 }, { yPercent: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: q('.footer-word'), start: 'top bottom', end: 'bottom bottom', scrub: 0.5 } });
+      // The stamp is pressed down once, the first time it comes into view.
+      gsap.from(q('.sponsor-paper'), { y: -70, rotate: -7, opacity: 0, duration: 0.9, ease: 'back.out(1.7)', scrollTrigger: { trigger: q('.sponsor')[0], start: 'top 88%', once: true } });
     },
     { scope: root },
   );
@@ -53,6 +72,7 @@ export function Footer() {
         <canvas ref={canvas} style={{ maskImage: mask, WebkitMaskImage: mask }} aria-hidden="true" />
         <span className="sr-only">ebru</span>
       </div>
+      <Sponsor />
       <div className="footer-end">
         <p>
           ebru is an AI-powered, multi-platform board for teamwork and workload evaluation. Built for the Technical English midterm, Foundation Year Engineering, NOVA University Lisbon and The Knowledge Hub.
