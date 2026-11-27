@@ -1,8 +1,9 @@
-import { person } from '../people.ts';
+import type { Person } from '../people.ts';
 import './ring.css';
 
+/** The person comes in whole, so the ring needs no store: the public site draws it for the sample team too. */
 interface Props {
-  id: string;
+  person: Person;
   /** 1 is all that one person can carry. */
   ratio: number;
   /** Printed marbling; plain colour until it has dried. */
@@ -16,8 +17,8 @@ const RIM = oval(61.8, 77.8);
 const MORE = oval(68, 84);
 
 /** A portrait in a ring of white paper. The ring fills with ink, and what does not fit lies outside it. */
-export function Ring({ id, ratio, paper }: Props) {
-  const p = person(id)!;
+export function Ring({ person: p, ratio, paper }: Props) {
+  const id = p.id;
   const percent = Math.round(ratio * 100);
   const inked = Math.min(100, percent);
   const more = Math.max(0, percent - 100);

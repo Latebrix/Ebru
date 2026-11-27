@@ -20,7 +20,7 @@ const EDGE = ['#ffb43a', '#f4ece0', '#ff9ec2', '#08080d'];
 function Sponsor() {
   return (
     <aside className="sponsor" aria-label="Sponsor">
-      <p className="sponsor-by">Sponsored by</p>
+      <p className="sponsor-by">Testing is sponsored by</p>
       <a className="sponsor-logo" href="https://www.browserstack.com" target="_blank" rel="sponsored noopener noreferrer" aria-label="BrowserStack">
         <img className="sponsor-icon" src="./ebru/sponsor-browserstack.webp" alt="" width="640" height="146" loading="lazy" decoding="async" />
         <img className="sponsor-name" src="./ebru/sponsor-browserstack.webp" alt="" width="640" height="146" loading="lazy" decoding="async" />

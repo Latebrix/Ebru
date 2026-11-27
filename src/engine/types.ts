@@ -52,6 +52,16 @@ export interface Evidence {
   at: string;
   /** 0..1 — how well the artifact matches what the task asked for (AI check). */
   relevance: number;
+  /** What Kalem saw when it read the proof (real projects only): 'reading' until it has. */
+  seen?: EvidenceSeen | 'reading';
+}
+
+export interface EvidenceSeen {
+  summary: string;
+  shows: string[];
+  missing: string[];
+  /** How Kalem read it: image, file, text, link (only the words about it) or none. */
+  how: 'image' | 'file' | 'text' | 'link' | 'none';
 }
 
 export interface Assignment {
@@ -72,6 +82,18 @@ export interface DifficultyFactor {
   value: number;
 }
 
+/** Kalem's estimate of a task in a real project: difficulty apart from effort, the hours it means, and why. */
+export interface TaskEstimate {
+  /** 1 routine … 5 very hard. */
+  difficulty: number;
+  /** Focused hours for one student, low and high. */
+  hours: [number, number];
+  confidence: 'low' | 'medium' | 'high';
+  why: string;
+  /** How to split it, for 8 points or more. */
+  split?: string;
+}
+
 export interface Task {
   id: string;
   title: string;
@@ -81,6 +103,8 @@ export interface Task {
   /** AI-estimated effort points (Fibonacci scale), calibrated by the team. */
   points: number;
   difficulty?: DifficultyFactor[];
+  /** Kalem's estimate (real projects): the estimate, or that Kalem is still estimating, or could not. */
+  estimate?: TaskEstimate | 'estimating' | 'failed';
   assignees: Assignment[];
   /** ISO date (YYYY-MM-DD). */
   due: string;

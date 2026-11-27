@@ -3,7 +3,7 @@ import { HEX, tints } from '../../brand/palette.ts';
 import { inkState, type InkState } from '../../ink/Marble.ts';
 import { rng } from '../../ink/random.ts';
 import { inkTexture } from '../../ink/texture.ts';
-import { people, type Person } from '../people.ts';
+import type { Person } from '../people.ts';
 
 const W = 384;
 const H = 480;
@@ -25,28 +25,28 @@ function paper(p: Person, i: number): InkState {
 }
 
 /** The paper of one teammate, printed once and kept. */
-function printPaper(id: string): Promise<string> {
+function printPaper(people: Person[], id: string): Promise<string> {
   const i = people.findIndex((p) => p.id === id);
-  return inkTexture(`ring-${id}`, W, H, () => paper(people[i], i));
+  return inkTexture(`ring-${id}-${people[i].ink}`, W, H, () => paper(people[i], i));
 }
 
 /**
  * Every teammate's paper by their id. Missing until it has dried, and on machines that cannot
  * paint: the plain colour says the same.
  */
-export function usePapers(wanted = true): Record<string, string> {
+export function usePapers(people: Person[], wanted = true): Record<string, string> {
   const [papers, set] = useState<Record<string, string>>({});
   useEffect(() => {
     if (!wanted) return;
     let stale = false;
     for (const { id } of people) {
-      printPaper(id)
+      printPaper(people, id)
         .then((url) => !stale && set((old) => ({ ...old, [id]: url })))
         .catch(() => undefined);
     }
     return () => {
       stale = true;
     };
-  }, [wanted]);
+  }, [people, wanted]);
   return papers;
 }

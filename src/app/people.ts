@@ -1,10 +1,23 @@
 import { HEX, MEMBER_INK, onInk, type InkName } from '../brand/palette.ts';
 import { team } from '../data/atlas.ts';
 
+/** A person as the interface draws them: their ink, and a portrait. */
+export interface Person {
+  id: string;
+  name: string;
+  first: string;
+  role: string;
+  ink: InkName;
+  hex: string;
+  text: string;
+  portrait: string;
+}
+
 /** Portraits are paper collages of nobody in particular. */
 const CAMEO: Record<string, number> = { laila: 3, omar: 4, nour: 11, youssef: 1, karim: 12 };
 
-export const people = team.members.map((m) => ({
+/** The sample team. The open workspace's people are in the store (usePeople). */
+export const demoPeople: Person[] = team.members.map((m) => ({
   id: m.id,
   name: m.name,
   first: m.first,
@@ -15,5 +28,5 @@ export const people = team.members.map((m) => ({
   portrait: `./ebru/show/cameo-${CAMEO[m.id]}.webp`,
 }));
 
-export type Person = (typeof people)[number];
-export const person = (id: string): Person | undefined => people.find((p) => p.id === id);
+/** Finds a person in a list. */
+export const personIn = (people: Person[], id: string | undefined): Person | undefined => people.find((p) => p.id === id);

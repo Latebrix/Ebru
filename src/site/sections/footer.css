@@ -79,10 +79,13 @@
   text-align: center;
 }
 
+/* The rule runs the full width, like the wordmark above and the last row below, with the words in its middle. */
 .sponsor-by {
   display: flex;
   align-items: center;
-  gap: 14px;
+  align-self: stretch;
+  gap: clamp(14px, 2vw, 24px);
+  white-space: nowrap;
   font-size: 12.5px;
   font-weight: 650;
   letter-spacing: 0.16em;
@@ -93,10 +96,10 @@
 .sponsor-by::before,
 .sponsor-by::after {
   content: '';
-  width: clamp(28px, 6vw, 64px);
+  flex: 1;
   height: 1px;
   background: currentColor;
-  opacity: 0.45;
+  opacity: 0.3;
 }
 
 /* The same image twice: the icon in its colours, the lettering turned light for the dark footer. */

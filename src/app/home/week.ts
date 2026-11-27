@@ -1,8 +1,7 @@
-import { team } from '../../data/atlas.ts';
 import { toDay, weekdayName } from '../../engine/calendar.ts';
 import { alerts, forecast, type Alert } from '../../engine/fairguard.ts';
-import type { Task } from '../../engine/types.ts';
-import { people } from '../people.ts';
+import type { Task, Team } from '../../engine/types.ts';
+import type { Person } from '../people.ts';
 
 /** What one person carries on their hardest day; 1 is all that one person can carry. */
 export interface Load {
@@ -16,10 +15,10 @@ export interface Week {
   worst: Alert | undefined;
 }
 
-export function weekOf(tasks: Task[]): Week {
+export function weekOf(team: Team, people: Person[], tasks: Task[]): Week {
   const f = forecast(team, tasks);
   return {
-    loads: people.map((p) => ({ id: p.id, ratio: f.members.find((m) => m.member.id === p.id)!.peak.ratio })),
+    loads: people.map((p) => ({ id: p.id, ratio: f.members.find((m) => m.member.id === p.id)?.peak.ratio ?? 0 })),
     balance: f.balance,
     worst: alerts(f)[0],
   };

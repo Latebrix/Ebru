@@ -4,10 +4,10 @@ import { Edge } from '../../app/home/Edge.tsx';
 import { usePapers } from '../../app/home/prints.ts';
 import { Ring } from '../../app/home/Ring.tsx';
 import { dayOf, nextUp, weekOf } from '../../app/home/week.ts';
-import { person } from '../../app/people.ts';
+import { demoPeople, personIn } from '../../app/people.ts';
 import { Flower } from '../../brand/Mark.tsx';
 import { HEX, memberHex, MEMBER_INK } from '../../brand/palette.ts';
-import { tasks } from '../../data/atlas.ts';
+import { tasks, team } from '../../data/atlas.ts';
 import { applySuggestion } from '../../engine/fairguard.ts';
 import { pixelRatio, reducedMotion } from '../../ink/quality.ts';
 import { plan, report, shortTitle } from '../data.ts';
@@ -18,11 +18,12 @@ import './platforms.css';
 
 const EDGE = ['#ff5a3c', '#ffb43a', '#f4ece0', '#2a3df0'];
 
-const WEEK = weekOf(tasks);
+const person = (id: string | undefined) => personIn(demoPeople, id);
+const WEEK = weekOf(team, demoPeople, tasks);
 const NEXT = nextUp(tasks, null).slice(0, 4);
 const MOVE = plan.suggestions[0];
 /** The week after the first move. */
-const FIRST = weekOf(applySuggestion(tasks, MOVE));
+const FIRST = weekOf(team, demoPeople, applySuggestion(tasks, MOVE));
 const load = (w: typeof WEEK, id: string) => `${Math.round(w.loads.find((l) => l.id === id)!.ratio * 100)}%`;
 const NOUR = tasks.filter((t) => t.status !== 'done' && t.status !== 'backlog' && t.assignees.some((a) => a.member === 'nour')).slice(0, 3);
 const byShare = [...report.members].sort((a, b) => b.share - a.share);
@@ -57,7 +58,7 @@ function Laptop({ papers }: { papers: Record<string, string> }) {
           <ul className="ui-mates">
             {WEEK.loads.map((l) => (
               <li key={l.id} data-full={l.ratio > 1}>
-                <Ring id={l.id} ratio={l.ratio} paper={papers[l.id] ?? null} />
+                <Ring person={person(l.id)!} ratio={l.ratio} paper={papers[l.id] ?? null} />
                 <p>
                   {person(l.id)!.first}
                   <b>{Math.round(l.ratio * 100)}%</b>
@@ -150,7 +151,7 @@ export function Platforms() {
   const root = useRef<HTMLElement>(null);
   const stage = useRef<HTMLDivElement>(null);
   const [close, setClose] = useState(false);
-  const papers = usePapers(close);
+  const papers = usePapers(demoPeople, close);
 
   // Every device copies the part of the shared picture it is in front of.
   useEffect(() => {
