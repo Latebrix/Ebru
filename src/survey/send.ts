@@ -3,10 +3,10 @@
  * add a row and nobody read one, so the page needs no key: only the public project id. Answers carry no
  * names and no address; Appwrite checks every value against the table's columns.
  */
-const env = import.meta.env;
+import { BACKEND } from '../links.ts';
 
-const ENDPOINT = (env.VITE_APPWRITE_ENDPOINT as string | undefined) || 'https://fra.cloud.appwrite.io/v1';
-const PROJECT = (env.VITE_APPWRITE_PROJECT as string | undefined) || '6b0339c9003768c0ff10';
+const ENDPOINT = BACKEND.endpoint;
+const PROJECT = BACKEND.project;
 const DATABASE = 'research';
 const TABLE = 'survey';
 

@@ -69,90 +69,70 @@
   white-space: nowrap;
 }
 
-/* Our sponsor, on a stamp perforated on all four sides like the deck's. */
+/* Our sponsor: a quiet credit, centred, like the end titles of a film. */
 .sponsor {
-  padding: clamp(44px, 8svh, 96px) var(--gutter) 0;
-}
-
-.sponsor-paper {
-  position: relative;
-  isolation: isolate;
-  display: grid;
-  grid-template-columns: minmax(0, 290px) minmax(0, 1fr);
-  align-items: center;
-  max-width: 900px;
-  padding: 36px 46px 38px;
-  color: var(--ink);
-  transform: rotate(-1deg);
-}
-
-/* The bites: a hole on every tile, centred on the paper's edge. The layer reaches half a tile past
-   the paper and is cut back to it, and "round" fits whole tiles, so the holes meet the corners. */
-.sponsor-paper::after {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  inset: -9px;
-  background: radial-gradient(circle, transparent 0 5.5px, var(--bone) 6px) 0 0 / 18px 18px round;
-  clip-path: inset(9px);
-}
-
-/* Solid paper over the inner holes, so only the edge keeps its bites. */
-.sponsor-paper::before {
-  content: '';
-  position: absolute;
-  inset: 8px;
-  background: var(--bone);
-}
-
-.sponsor-paper > * {
-  position: relative;
-  z-index: 1;
-}
-
-.sponsor-who {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  align-items: center;
+  gap: clamp(16px, 2.4svh, 24px);
+  padding: clamp(64px, 11svh, 128px) var(--gutter) clamp(28px, 6svh, 64px);
+  text-align: center;
 }
 
 .sponsor-by {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 13px;
+  gap: 14px;
+  font-size: 12.5px;
   font-weight: 650;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
+  color: var(--bone-2);
 }
 
-/* A drop of ebru's ink, as everywhere else. */
-.sponsor-by::before {
+.sponsor-by::before,
+.sponsor-by::after {
   content: '';
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: radial-gradient(circle, var(--verm) 0 30%, var(--bone) 31% 46%, var(--verm) 47%);
+  width: clamp(28px, 6vw, 64px);
+  height: 1px;
+  background: currentColor;
+  opacity: 0.45;
 }
 
-.sponsor-who a {
+/* The same image twice: the icon in its colours, the lettering turned light for the dark footer. */
+.sponsor-logo {
+  position: relative;
   display: block;
+  width: clamp(190px, 20vw, 270px);
+  aspect-ratio: 640 / 146;
   border-radius: 6px;
 }
 
-.sponsor-who img {
-  display: block;
+/* The hover moves the images, not the link: GSAP brings the link in, and the two must not fight over it. */
+.sponsor-logo img {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
+  height: 100%;
+  opacity: 0.92;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
 }
 
-.sponsor-line {
-  margin-left: clamp(26px, 3vw, 46px);
-  padding-left: clamp(26px, 3vw, 46px);
-  border-left: 2px solid var(--ink);
-  font-size: clamp(16px, 1.25vw, 20px);
-  line-height: 1.45;
-  text-wrap: pretty;
+.sponsor-logo:hover img,
+.sponsor-logo:focus-visible img {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.sponsor-icon {
+  clip-path: inset(0 77% 0 0);
+}
+
+.sponsor-name {
+  clip-path: inset(0 0 0 23%);
+  filter: invert(1) sepia(0.12);
 }
 
 @media (max-width: 860px) {
@@ -162,22 +142,5 @@
 
   .footer-end a {
     justify-self: start;
-  }
-
-  .sponsor-paper {
-    grid-template-columns: minmax(0, 1fr);
-    row-gap: 22px;
-    padding: 30px 28px 32px;
-  }
-
-  .sponsor-who {
-    max-width: 260px;
-  }
-
-  .sponsor-line {
-    margin: 0;
-    padding: 20px 0 0;
-    border-left: 0;
-    border-top: 2px solid var(--ink);
   }
 }

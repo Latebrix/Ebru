@@ -38,7 +38,8 @@
       "src/kalem/Squid.ts",
       "src/kalem/anatomy.ts",
       "src/kalem/inks.ts",
-      "src/kalem/skin.ts"
+      "src/kalem/skin.ts",
+      "src/links.ts"
     ],
     "Kalem-Presentation": [
       "src/content/kalem.json",

@@ -13,19 +13,18 @@ import { LINKS } from '../../links.ts';
 
 const EDGE = ['#ffb43a', '#f4ece0', '#ff9ec2', '#08080d'];
 
-/** Our sponsor on a perforated stamp, as in the deck, in the words BrowserStack agreed to. The site names it only; amounts stay in the deck. */
+/**
+ * Our sponsor, credited once, centred under the wordmark: the name and the logo, nothing more. The logo's dark
+ * lettering is drawn light here (the icon keeps its colours), as BrowserStack's own logo for dark backgrounds does.
+ */
 function Sponsor() {
   return (
-    <aside className="sponsor" aria-label="Our sponsor">
-      <div className="sponsor-paper">
-        <div className="sponsor-who">
-          <p className="sponsor-by">Sponsored by</p>
-          <a href="https://www.browserstack.com" target="_blank" rel="sponsored noopener noreferrer">
-            <img src="./ebru/sponsor-browserstack.webp" alt="BrowserStack" width="640" height="146" loading="lazy" decoding="async" />
-          </a>
-        </div>
-        <p className="sponsor-line">This project is tested with BrowserStack. BrowserStack sponsors the testing infrastructure for this project.</p>
-      </div>
+    <aside className="sponsor" aria-label="Sponsor">
+      <p className="sponsor-by">Sponsored by</p>
+      <a className="sponsor-logo" href="https://www.browserstack.com" target="_blank" rel="sponsored noopener noreferrer" aria-label="BrowserStack">
+        <img className="sponsor-icon" src="./ebru/sponsor-browserstack.webp" alt="" width="640" height="146" loading="lazy" decoding="async" />
+        <img className="sponsor-name" src="./ebru/sponsor-browserstack.webp" alt="" width="640" height="146" loading="lazy" decoding="async" />
+      </a>
     </aside>
   );
 }
@@ -50,8 +49,7 @@ export function Footer() {
       revealTitle(q('.footer-title')[0], q('.footer-top')[0], 'top 70%');
       revealCopy(q('.footer-row'), q('.footer-top')[0], 'top 66%', 0.3);
       gsap.fromTo(q('.footer-word'), { yPercent: 26, scale: 0.94 }, { yPercent: 0, scale: 1, ease: 'none', scrollTrigger: { trigger: q('.footer-word'), start: 'top bottom', end: 'bottom bottom', scrub: 0.5 } });
-      // The stamp is pressed down once, the first time it comes into view.
-      gsap.from(q('.sponsor-paper'), { y: -70, rotate: -7, opacity: 0, duration: 0.9, ease: 'back.out(1.7)', scrollTrigger: { trigger: q('.sponsor')[0], start: 'top 88%', once: true } });
+      gsap.from(q('.sponsor > *'), { y: 16, opacity: 0, duration: 0.8, stagger: 0.1, ease: 'power2.out', scrollTrigger: { trigger: q('.sponsor')[0], start: 'top 92%', once: true } });
     },
     { scope: root },
   );
