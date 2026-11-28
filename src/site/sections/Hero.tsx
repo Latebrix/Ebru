@@ -161,7 +161,7 @@ export function Hero({ onPour }: { onPour: () => void }) {
               </LinkButton>
             </div>
             <p className="hero-access">
-              ebru opens by invitation for now. <a href={`${LINKS.site}request-access`}>Ask to try it</a>
+              ebru opens by invitation for now. <a href={`${LINKS.site}request-access`}>Ask to try it</a> · <a href={`${LINKS.site}download`}>Get the app</a>
             </p>
           </div>
         </div>

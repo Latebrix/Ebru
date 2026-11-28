@@ -24,6 +24,7 @@ export default defineConfig(({ mode }) => {
           ask: resolve(root, 'ask.html'),
           survey: resolve(root, 'survey.html'),
           access: resolve(root, 'request-access.html'),
+          download: resolve(root, 'download.html'),
         },
       },
     },

@@ -147,8 +147,8 @@ function Tablet() {
   );
 }
 
-export function Platforms() {
-  const root = useRef<HTMLElement>(null);
+/** The laptop, phone and tablet over one shared water, drifting as the page scrolls. The website and the download page use it. */
+export function Devices() {
   const stage = useRef<HTMLDivElement>(null);
   const [close, setClose] = useState(false);
   const papers = usePapers(demoPeople, close);
@@ -223,26 +223,16 @@ export function Platforms() {
   useGSAP(
     () => {
       if (reducedMotion()) return;
-      const q = gsap.utils.selector(root);
-      revealTitle(q('.platforms-title')[0], q('.platforms-head')[0]);
-      revealCopy(q('.platforms-head .lead'), q('.platforms-head')[0]);
+      const q = gsap.utils.selector(stage);
       const through = { trigger: stage.current, start: 'top bottom', end: 'bottom top', scrub: 0.6 } as const;
       gsap.fromTo(q('.device-laptop'), { y: 120, rotate: 1.5 }, { y: -70, rotate: -1, ease: 'none', scrollTrigger: through });
       gsap.fromTo(q('.device-phone'), { y: 420, rotate: -9 }, { y: -190, rotate: -2, ease: 'none', scrollTrigger: through });
       gsap.fromTo(q('.device-tablet'), { y: 300, rotate: 10 }, { y: -130, rotate: 2.5, ease: 'none', scrollTrigger: through });
-      gsap.from(q('.systems li'), { y: 30, opacity: 0, stagger: 0.07, duration: 0.9, scrollTrigger: { trigger: q('.systems'), start: 'top 92%' } });
     },
-    { scope: root },
+    { scope: stage },
   );
 
   return (
-    <section className="platforms" ref={root} data-nav="dark">
-      <CombEdge bands={EDGE} />
-      <div className="platforms-in">
-        <div className="platforms-head">
-          <h2 className="display h-xl platforms-title">One water. Every screen.</h2>
-          <p className="lead">Plan on the web, photograph proof with your phone, work deep on the desktop. Every drop lands in the same picture, seconds later.</p>
-        </div>
         <div className="devices" ref={stage} aria-hidden="true">
           <div className="device device-laptop" data-wide={820}>
             <div className="device-screen">
@@ -261,6 +251,32 @@ export function Platforms() {
             </div>
           </div>
         </div>
+  );
+}
+
+export function Platforms() {
+  const root = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      if (reducedMotion()) return;
+      const q = gsap.utils.selector(root);
+      revealTitle(q('.platforms-title')[0], q('.platforms-head')[0]);
+      revealCopy(q('.platforms-head .lead'), q('.platforms-head')[0]);
+      gsap.from(q('.systems li'), { y: 30, opacity: 0, stagger: 0.07, duration: 0.9, scrollTrigger: { trigger: q('.systems'), start: 'top 92%' } });
+    },
+    { scope: root },
+  );
+
+  return (
+    <section className="platforms" ref={root} data-nav="dark">
+      <CombEdge bands={EDGE} />
+      <div className="platforms-in">
+        <div className="platforms-head">
+          <h2 className="display h-xl platforms-title">One water. Every screen.</h2>
+          <p className="lead">Plan on the web, photograph proof with your phone, work deep on the desktop. Every drop lands in the same picture, seconds later.</p>
+        </div>
+        <Devices />
         <ul className="systems">
           {['Web', 'iOS', 'Android', 'Windows', 'macOS'].map((s) => (
             <li key={s}>{s}</li>

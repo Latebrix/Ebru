@@ -1,0 +1,181 @@
+/* Getting ebru: the platforms section of the website as a page of its own, every platform a line of large type. */
+
+.dl {
+  min-height: 100svh;
+}
+
+.dl .platforms-in {
+  padding-top: clamp(120px, 18svh, 190px);
+}
+
+.dl-top {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 92px;
+  padding: 0 var(--gutter);
+}
+
+.dl-mark {
+  display: block;
+  width: 52px;
+  height: 52px;
+}
+
+.dl-mark svg {
+  width: 100%;
+  height: 100%;
+}
+
+.dl-lang {
+  padding: 9px 16px;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--bone);
+  box-shadow: inset 0 0 0 2px rgb(244 236 224 / 40%);
+  transition: box-shadow 0.2s;
+}
+
+.dl-lang:hover {
+  box-shadow: inset 0 0 0 2px var(--bone);
+}
+
+.dl-eyebrow {
+  margin-bottom: 18px;
+  font-size: 14px;
+  font-weight: 650;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--saff);
+}
+
+/* Every platform a line, as in the website's list of systems, with how to get it beside it */
+.dl-rows {
+  margin: clamp(40px, 9svh, 120px) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dl-row {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  align-items: center;
+  gap: 16px clamp(24px, 4vw, 80px);
+  padding: clamp(22px, 3.4svh, 40px) 0;
+  border-top: 2px solid var(--bone);
+}
+
+.dl-row:last-child {
+  border-bottom: 2px solid var(--bone);
+}
+
+.dl-name {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+  margin: 0;
+  font-weight: 500;
+  font-size: clamp(44px, 6.4vw, 118px);
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+}
+
+/* The visitor's own device wears the saffron drop */
+.dl-row[data-mine] .dl-name {
+  color: var(--saff);
+}
+
+.dl-mine {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 16px 9px;
+  border-radius: 999px;
+  background: var(--saff);
+  color: var(--ink);
+  font-family: var(--text);
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: 0;
+  line-height: 1;
+}
+
+.dl-mine::before {
+  content: '';
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+
+.dl-act {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.dl-act p {
+  max-width: 30em;
+  font-size: clamp(16px, 1.25vw, 19px);
+  line-height: 1.5;
+  color: rgb(244 236 224 / 82%);
+}
+
+.dl-soon {
+  padding: 6px 14px 7px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1;
+  box-shadow: inset 0 0 0 2px rgb(244 236 224 / 50%);
+}
+
+.dl-row[data-soon] .dl-name {
+  opacity: 0.55;
+}
+
+.dl-row[data-soon][data-mine] .dl-name {
+  opacity: 1;
+}
+
+/* On the blue water a line button is a bone outline, not a dark pill */
+.dl .btn-line {
+  background: transparent;
+  box-shadow: inset 0 0 0 2px rgb(244 236 224 / 70%);
+}
+
+.dl-invite {
+  margin-top: clamp(32px, 6svh, 64px);
+  font-size: clamp(16px, 1.25vw, 19px);
+  color: rgb(244 236 224 / 82%);
+}
+
+.dl-invite a {
+  color: var(--bone);
+  font-weight: 650;
+  text-decoration: underline;
+  text-decoration-color: var(--saff);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+/* Arabic letters join: no tracking, and room between lines */
+html[lang='ar'] .dl * {
+  letter-spacing: normal !important;
+}
+
+html[lang='ar'] .dl :is(h1, .dl-name) {
+  line-height: 1.25;
+}
+
+@media (max-width: 860px) {
+  .dl-row {
+    grid-template-columns: 1fr;
+  }
+}

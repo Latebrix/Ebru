@@ -61,6 +61,9 @@ export function Footer() {
         <h2 className="display footer-title">Share the work, not the stress.</h2>
         <div className="footer-row">
           <LinkButton href={LINKS.app}>Open the board</LinkButton>
+          <LinkButton href={`${LINKS.site}download`} tone="line">
+            Get the app
+          </LinkButton>
           <LinkButton href={`${LINKS.site}request-access`} tone="line">
             Ask to try ebru
           </LinkButton>
