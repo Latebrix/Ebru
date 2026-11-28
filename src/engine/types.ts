@@ -52,8 +52,15 @@ export interface Evidence {
   at: string;
   /** 0..1 — how well the artifact matches what the task asked for (AI check). */
   relevance: number;
-  /** What Kalem saw when it read the proof (real projects only): 'reading' until it has. */
-  seen?: EvidenceSeen | 'reading';
+  /**
+   * What Kalem saw when it read the proof (real projects only): 'reading' until it has, or why it did not read it (Kalem
+   * is off for the project, its author has no AI, or reading failed).
+   */
+  seen?: EvidenceSeen | 'reading' | { unread: 'kalem_off' | 'ai_off' | 'failed' };
+  /** The stored file, for a real project's upload (opens in a new tab). */
+  file?: string;
+  /** The link, for proof that is a link. */
+  url?: string;
 }
 
 export interface EvidenceSeen {
@@ -103,8 +110,15 @@ export interface Task {
   /** AI-estimated effort points (Fibonacci scale), calibrated by the team. */
   points: number;
   difficulty?: DifficultyFactor[];
-  /** Kalem's estimate (real projects): the estimate, or that Kalem is still estimating, or could not. */
-  estimate?: TaskEstimate | 'estimating' | 'failed';
+  /**
+   * Kalem's estimate (real projects): the estimate, or that Kalem is still estimating, could not (failed), or did not
+   * because Kalem or the AI is off for whoever made the task (off).
+   */
+  estimate?: TaskEstimate | 'estimating' | 'failed' | 'off';
+  /** Who made the task (real projects): they may give it to someone while nobody owns it. */
+  createdBy?: string;
+  /** What the teammate who checked the work asked to change, when they sent it back. */
+  reviewNote?: string;
   assignees: Assignment[];
   /** ISO date (YYYY-MM-DD). */
   due: string;

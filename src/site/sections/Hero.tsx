@@ -160,6 +160,9 @@ export function Hero({ onPour }: { onPour: () => void }) {
                 Watch Kalem present
               </LinkButton>
             </div>
+            <p className="hero-access">
+              ebru opens by invitation for now. <a href={`${LINKS.site}request-access`}>Ask to try it</a>
+            </p>
           </div>
         </div>
         <div className="hero-fade">

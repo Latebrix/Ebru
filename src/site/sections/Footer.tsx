@@ -4,7 +4,7 @@ import { EBRU_BOX, EBRU_PATH } from '../../brand/wordmark.ts';
 import { reducedMotion } from '../../ink/quality.ts';
 import { useInk } from '../../ink/useInk.ts';
 import { gsap, revealCopy, revealTitle, scrollTo } from '../motion.ts';
-import { LinkButton, PlayIcon } from '../ui/Button.tsx';
+import { LinkButton } from '../ui/Button.tsx';
 import { CombEdge } from '../ui/CombEdge.tsx';
 import { plop } from '../ui/sound.ts';
 import { FooterScene } from './footerScene.ts';
@@ -61,8 +61,8 @@ export function Footer() {
         <h2 className="display footer-title">Share the work, not the stress.</h2>
         <div className="footer-row">
           <LinkButton href={LINKS.app}>Open the board</LinkButton>
-          <LinkButton href={LINKS.kalem} tone="line" icon={<PlayIcon />}>
-            Watch Kalem present
+          <LinkButton href={`${LINKS.site}request-access`} tone="line">
+            Ask to try ebru
           </LinkButton>
         </div>
       </div>

@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef, useState, type PointerEvent } from 'react';
 import { HAND_C } from '../../brand/hands.ts';
 import { HEX, MEMBER_INK } from '../../brand/palette.ts';
 import { tasks, team } from '../../data/atlas.ts';
-import { contributionReport, EVIDENCE_WEIGHT, proveTask, round1, type ContributionLine } from '../../engine/fairproof.ts';
+import { contributionReport, evidenceStrength, proveTask, round1, type ContributionLine } from '../../engine/fairproof.ts';
 import type { Evidence, Task } from '../../engine/types.ts';
 import { pixelRatio, reducedMotion } from '../../ink/quality.ts';
 import { shortTitle } from '../data.ts';
@@ -242,7 +242,7 @@ export function Proof() {
                           {e.title.split(' · ')[0]}, {e.source}
                         </small>
                       </span>
-                      <span className="ev-weight">{(EVIDENCE_WEIGHT[e.kind] * e.relevance).toFixed(2)}</span>
+                      <span className="ev-weight">{evidenceStrength(e).toFixed(2)}</span>
                     </button>
                   </li>
                 );

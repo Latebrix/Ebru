@@ -1,0 +1,265 @@
+/* Asking to try ebru: the website's ink, one column of words and one form, nothing else. */
+
+.ac {
+  min-height: 100svh;
+  padding: 0 clamp(16px, 5vw, 72px) 64px;
+  background: var(--ink);
+  color: var(--bone);
+}
+
+.ac-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 92px;
+}
+
+.ac-mark {
+  display: block;
+  width: 48px;
+  height: 48px;
+}
+
+.ac-mark svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ac-lang {
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgb(244 236 224 / 72%);
+  box-shadow: inset 0 0 0 1.5px rgb(244 236 224 / 18%);
+}
+
+.ac-lang:hover {
+  color: var(--bone);
+}
+
+.ac-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 480px);
+  align-items: start;
+  gap: clamp(32px, 6vw, 96px);
+  max-width: 1160px;
+  margin: clamp(16px, 5vh, 56px) auto 0;
+}
+
+.ac-eyebrow {
+  margin-bottom: 14px;
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--saff);
+}
+
+.ac-words h1 {
+  max-width: 11em;
+  font: 700 clamp(40px, 5.4vw, 84px) / 0.98 var(--display);
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.ac-words h1:focus {
+  outline: none;
+}
+
+.ac-lead {
+  max-width: 32em;
+  margin-top: 22px;
+  font-size: clamp(16.5px, 1.3vw, 19px);
+  line-height: 1.55;
+  color: rgb(244 236 224 / 78%);
+}
+
+.ac-words .ac-button {
+  margin-top: 28px;
+}
+
+.ac-form {
+  display: grid;
+  gap: 18px;
+  padding: clamp(20px, 2.6vw, 30px);
+  border-radius: 22px;
+  background: #111118;
+  box-shadow: inset 0 0 0 1px rgb(244 236 224 / 10%);
+}
+
+.ac-field {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.ac-field > span,
+.ac-field legend {
+  padding: 0;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.ac-field em {
+  font-style: normal;
+  font-weight: 500;
+  color: rgb(244 236 224 / 48%);
+}
+
+.ac-field input,
+.ac-field textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 14px;
+  border: 1.5px solid rgb(244 236 224 / 18%);
+  border-radius: 12px;
+  background: #17171f;
+  color: var(--bone);
+  font: inherit;
+  font-size: 16px;
+}
+
+.ac-field textarea {
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.ac-field input:focus,
+.ac-field textarea:focus {
+  outline: none;
+  border-color: var(--saff);
+}
+
+.ac-field input[aria-invalid='true'] {
+  border-color: #ff7a5c;
+}
+
+.ac-field small {
+  font-size: 13px;
+  line-height: 1.45;
+  color: rgb(244 236 224 / 48%);
+}
+
+.ac-field .ac-problem {
+  color: #ff7a5c;
+}
+
+.ac-sizes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.ac-sizes button {
+  min-width: 46px;
+  min-height: 40px;
+  border-radius: 999px;
+  font-weight: 600;
+  color: rgb(244 236 224 / 72%);
+  box-shadow: inset 0 0 0 1.5px rgb(244 236 224 / 18%);
+}
+
+.ac-sizes button[aria-checked='true'] {
+  background: var(--bone);
+  color: var(--ink);
+  box-shadow: none;
+}
+
+/* Hidden from people; a script that fills it in is told what a person would be told, and nothing is kept. */
+.ac-trap {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.ac-note {
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: #17171f;
+  box-shadow: inset 3px 0 0 #ff7a5c;
+  font-size: 14.5px;
+  line-height: 1.45;
+}
+
+[dir='rtl'] .ac-note {
+  box-shadow: inset -3px 0 0 #ff7a5c;
+}
+
+.ac-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 24px;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--bone);
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 650;
+}
+
+.ac-button:hover:not(:disabled) {
+  background: #fff8ee;
+}
+
+.ac-button[aria-busy='true'] span {
+  opacity: 0.55;
+}
+
+.ac-button[aria-busy='true']::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--ink) 40%, var(--ink) 60%, transparent) no-repeat;
+  background-size: 50% 100%;
+  animation: ac-busy 1.1s linear infinite;
+}
+
+@keyframes ac-busy {
+  from {
+    background-position: -50% 0;
+  }
+
+  to {
+    background-position: 150% 0;
+  }
+}
+
+.ac-fine {
+  font-size: 13px;
+  line-height: 1.5;
+  color: rgb(244 236 224 / 48%);
+}
+
+.ac-sample {
+  justify-self: start;
+  font-size: 14.5px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--saff);
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 860px) {
+  .ac-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ac-button[aria-busy='true']::after {
+    animation: none;
+    background: var(--ink);
+    opacity: 0.5;
+  }
+}

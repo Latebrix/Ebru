@@ -23,6 +23,7 @@ export default defineConfig(({ mode }) => {
           site: resolve(root, 'index.html'),
           ask: resolve(root, 'ask.html'),
           survey: resolve(root, 'survey.html'),
+          access: resolve(root, 'request-access.html'),
         },
       },
     },

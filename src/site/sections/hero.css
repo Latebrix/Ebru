@@ -112,6 +112,20 @@
   margin-top: clamp(24px, 4svh, 48px);
 }
 
+.hero-access {
+  margin-top: 16px;
+  font-size: 15px;
+  color: rgb(244 236 224 / 72%);
+}
+
+.hero-access a {
+  font-weight: 650;
+  color: var(--bone);
+  text-decoration: underline;
+  text-decoration-color: var(--saff);
+  text-underline-offset: 3px;
+}
+
 .hero-def {
   position: absolute;
   z-index: 2;

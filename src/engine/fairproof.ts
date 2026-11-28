@@ -4,22 +4,36 @@
  * verified effort (task) = effort points × evidence confidence × execution factor
  * Verified Contribution Score (member) = Σ verified effort × the member's share of each task
  *
+ * One good piece of proof is enough to count: a piece proves as much as Kalem judges it shows of the task (its
+ * relevance), up to what its kind can show at all, and several pieces add up without ever passing 1:
+ *
+ * strength (piece) = min(cap of its kind, relevance)
+ * evidence confidence (task) = 1 − Π (1 − strength)
+ *
  * Every number carries its reasons so the UI can always answer "why this score?".
  */
 import type { EvidenceKind, Member, Task, Team } from './types.ts';
 
-/** How much each kind of artifact can prove on its own, before the AI relevance check. */
-export const EVIDENCE_WEIGHT: Record<EvidenceKind, number> = {
-  pull: 0.45,
-  design: 0.5,
-  doc: 0.4,
-  commit: 0.35,
-  test: 0.35,
-  file: 0.3,
-  review: 0.3,
-  screenshot: 0.2,
-  link: 0.15,
+/**
+ * The most each kind of proof can show on its own. Kalem reads files and images; it never opens links, so a bare link
+ * or a commit is taken at its word only so far.
+ */
+export const EVIDENCE_CAP: Record<EvidenceKind, number> = {
+  pull: 0.9,
+  design: 1,
+  doc: 1,
+  commit: 0.85,
+  test: 1,
+  file: 1,
+  review: 0.7,
+  screenshot: 0.85,
+  link: 0.6,
 };
+
+/** How much one piece of proof shows of its task, 0..1. */
+export function evidenceStrength(e: { kind: EvidenceKind; relevance: number }): number {
+  return Math.max(0, Math.min(EVIDENCE_CAP[e.kind], e.relevance));
+}
 
 export const EVIDENCE_LABEL: Record<EvidenceKind, string> = {
   pull: 'Pull request',
@@ -33,12 +47,12 @@ export const EVIDENCE_LABEL: Record<EvidenceKind, string> = {
   link: 'Link',
 };
 
-/** Below this, a closed task is treated as "waiting for evidence" and earns nothing yet. */
+/** Below this, handed-in work is treated as "the proof does not show it yet" and earns nothing yet. */
 export const PENDING_THRESHOLD = 0.3;
 
 export function evidenceConfidence(task: Task): number {
-  const raw = task.evidence.reduce((sum, e) => sum + EVIDENCE_WEIGHT[e.kind] * e.relevance, 0);
-  return Math.min(1, raw);
+  const missing = task.evidence.reduce((left, e) => left * (1 - evidenceStrength(e)), 1);
+  return Math.min(1, Math.max(0, 1 - missing));
 }
 
 export function executionFactor(task: Task): number {
