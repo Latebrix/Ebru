@@ -1,0 +1,206 @@
+/* Getting ebru: the website's ink, the words on one side, the visitor's own device first on the other. */
+
+.dl {
+  min-height: 100svh;
+  padding: 0 clamp(16px, 5vw, 72px) 72px;
+  background: var(--ink);
+  color: var(--bone);
+}
+
+.dl-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 92px;
+}
+
+.dl-mark {
+  display: block;
+  width: 48px;
+  height: 48px;
+}
+
+.dl-mark svg {
+  width: 100%;
+  height: 100%;
+}
+
+.dl-lang {
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgb(244 236 224 / 72%);
+  box-shadow: inset 0 0 0 1.5px rgb(244 236 224 / 18%);
+}
+
+.dl-lang:hover {
+  color: var(--bone);
+}
+
+.dl-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 620px);
+  align-items: start;
+  gap: clamp(32px, 6vw, 96px);
+  max-width: 1240px;
+  margin: clamp(16px, 5vh, 56px) auto 0;
+}
+
+.dl-eyebrow,
+.dl-label {
+  margin-bottom: 14px;
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--saff);
+}
+
+.dl-label {
+  margin-top: 28px;
+  color: rgb(244 236 224 / 55%);
+}
+
+.dl-label:first-child {
+  margin-top: 0;
+}
+
+.dl-words h1 {
+  max-width: 11em;
+  font: 700 clamp(40px, 5.4vw, 84px) / 0.98 var(--display);
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.dl-lead {
+  max-width: 32em;
+  margin-top: 22px;
+  font-size: clamp(16.5px, 1.3vw, 19px);
+  line-height: 1.55;
+  color: rgb(244 236 224 / 78%);
+}
+
+.dl-invite {
+  margin-top: 26px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: rgb(244 236 224 / 62%);
+}
+
+.dl-invite a {
+  color: var(--bone);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--saff);
+  text-underline-offset: 3px;
+}
+
+.dl-cards {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dl-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.dl-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px;
+  border-radius: 22px;
+  background: #111118;
+  box-shadow: inset 0 0 0 1px rgb(244 236 224 / 10%);
+}
+
+.dl-card[data-first] {
+  padding: 28px;
+  box-shadow:
+    inset 0 0 0 1px rgb(244 236 224 / 10%),
+    0 0 0 3px var(--saff);
+}
+
+.dl-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.dl-card h3 {
+  font: 700 22px / 1.15 var(--display);
+}
+
+.dl-card[data-first] h3 {
+  font-size: 30px;
+}
+
+.dl-card p {
+  font-size: 15px;
+  line-height: 1.55;
+  color: rgb(244 236 224 / 72%);
+}
+
+.dl-soon {
+  flex: none;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--bone);
+  box-shadow: inset 0 0 0 1.5px rgb(244 236 224 / 26%);
+}
+
+.dl-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  min-height: 46px;
+  margin-top: auto;
+  padding: 0 22px;
+  border-radius: 14px;
+  background: var(--bone);
+  color: var(--ink);
+  font-size: 15.5px;
+  font-weight: 650;
+}
+
+.dl-button:hover {
+  background: #fff8ee;
+}
+
+.dl-button.dl-quiet {
+  background: transparent;
+  color: var(--bone);
+  box-shadow: inset 0 0 0 1.5px rgb(244 236 224 / 26%);
+}
+
+.dl-button.dl-quiet:hover {
+  background: rgb(244 236 224 / 6%);
+}
+
+html[lang='ar'] .dl * {
+  letter-spacing: normal;
+}
+
+html[lang='ar'] .dl h1 {
+  line-height: 1.3;
+}
+
+@media (max-width: 960px) {
+  .dl-body {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .dl-grid {
+    grid-template-columns: 1fr;
+  }
+}
